@@ -1,0 +1,102 @@
+{
+   "projetos": [
+      {
+         "nome": "App Vendas",
+         "id": 1
+      },
+      {
+         "nome": "Front Site Empresarial",
+         "id": 2
+      },
+      {
+         "nome": "Impressão de etiquetas",
+         "id": 3
+      }
+   ],
+
+   "desenvolvedores": [
+      {
+         "nome": "Marcelo",
+         "id": 1
+      },
+      {
+         "nome": "Claudio",
+         "id": 2
+      },
+      {
+         "nome": "Andre",
+         "id": 3
+      },
+      {
+         "nome": "Thiago",
+         "id": 4
+      },
+      {
+         "nome": "Arthur",
+         "id": 5
+      }
+   ],
+
+   "atividades": [
+      {
+         "descricao": "Criação do Header do Site",
+         "idDev": 1,
+         "idProj": 2,
+         "status": "A"
+      },
+      {
+         "descricao": "Criação do back-end do formulário",
+         "idDev": 3,
+         "idProj": 2,
+         "status": "B"
+      },
+      {
+         "descricao": "Criação das tabelas de preço",
+         "idDev": 2,
+         "idProj": 1,
+         "status": "C"
+      },
+      {
+         "descricao": "Filtro por cliente",
+         "idDev": 1,
+         "idProj": 1,
+         "status": "B"
+      },
+      {
+         "descricao": "Listar vendas",
+         "idDev": 1,
+         "idProj": 1,
+         "status": "C"
+      },
+      {
+         "descricao": "Criação design das etiquetas",
+         "idDev": 5,
+         "idProj": 3,
+         "status": "A"
+      },
+      {
+         "descricao": "Configuração do coletor",
+         "idDev": 4,
+         "idProj": 3,
+         "status": "A"
+      },
+      {
+         "descricao": "Desenvolvimento dos campos do formulário",
+         "idDev": 2,
+         "idProj": 2,
+         "status": "B"
+      },
+      {
+         "descricao": "Validação etiquetas",
+         "idDev": 2,
+         "idProj": 3,
+         "status": "B"
+      },
+      {
+         "descricao": "Listar Produtos",
+         "idDev": 3,
+         "idProj": 2,
+         "status": "C"
+      }
+   ]
+}
