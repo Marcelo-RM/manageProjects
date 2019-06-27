@@ -2,8 +2,17 @@
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}">
-					<content></content>
+				<Page id="page" title="{i18n>titleMaster}">
+					<content>
+						<List id="projectList"
+							items="{
+								path: '/projetos'
+							}">
+							<ObjectListItem  title="{nome}" number="{id}"  type="Navigation"  
+								press=".selectProject" >
+							</ObjectListItem>
+						</List>
+					</content>
 				</Page>
 			</pages>
 		</App>
