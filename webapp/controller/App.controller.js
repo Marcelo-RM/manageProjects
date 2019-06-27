@@ -1,21 +1,41 @@
 sap.ui.define([
-	"sap/ui/core/UIComponent",
-	"sap/ui/core/mvc/Controller"
-], function (UIComponent, Controller) {
+	"./BaseController",
+	"sap/ui/model/json/JSONModel"
+], function (BaseController, JSONModel) {
 	"use strict";
 
-	return Controller.extend("manageprojects.manageprojects.controller.App", {
-		onInit: function () {
+	return BaseController.extend("manageprojects.manageprojects.controller.App", {
 
-		},
+		onInit : function () {
+			var oViewModel,
+				fnSetAppNotBusy,
+				iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
 
-		selectProject: function(oEvent) {
-			debugger;
-			var idProject = oEvent.getSource().getProperty("number");
+			oViewModel = new JSONModel({
+				busy : true,
+				delay : 0,
+				layout : "OneColumn",
+				previousLayout : "",
+				actionButtonsInfo : {
+					midColumn : {
+						fullScreen : false
+					}
+				}
+			});
+			this.setModel(oViewModel, "appView");
 
-			this.oRouter = UIComponent.getRouterFor(this);
-			this.oRouter.navTo("detail", {idProject});
+			fnSetAppNotBusy = function() {
+				oViewModel.setProperty("/busy", false);
+				oViewModel.setProperty("/delay", iOriginalBusyDelay);
+			};
 
+			// since then() has no "reject"-path attach to the MetadataFailed-Event to disable the busy indicator in case of an error
+			//this.getOwnerComponent().getModel().metadataLoaded().then(fnSetAppNotBusy);
+			//this.getOwnerComponent().getModel().attachMetadataFailed(fnSetAppNotBusy);
+			this.getRouter().navTo("master", false);
+			// apply content density mode to root view
+			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 		}
+
 	});
 });

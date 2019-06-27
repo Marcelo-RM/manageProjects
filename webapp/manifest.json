@@ -71,31 +71,51 @@
 		},
 		"routing": {
 			"config": {
-				"routerClass": "sap.m.routing.Router",
+				"routerClass": "sap.f.routing.Router",
 				"viewType": "XML",
-				"async": true,
 				"viewPath": "manageprojects.manageprojects.view",
-				"controlAggregation": "pages",
-				"controlId": "app",
-				"clearControlAggregation": false
+				"controlId": "layout",
+				"controlAggregation": "beginColumnPages",
+				"bypassed": {
+					"target": "notFound"
+				},
+				"async": true
 			},
 			"routes": [
 				{
-					"name": "App",
-					"pattern": "RouteApp",
+					"pattern": "",
+					"name": "master",
+					"target": "master"
+				},
+				{
+					"pattern": "projetos/{objectId}",
+					"name": "object",
 					"target": [
-						"App"
+						"master",
+						"object"
 					]
 				}
 			],
 			"targets": {
-				"App": {
-					"viewType": "XML",
-					"transition": "slide",
-					"clearControlAggregation": false,
-					"viewId": "App",
-					"viewName": "App",
-					"controlAggregation": "masterPages"
+				"master": {
+					"viewName": "Master",
+					"viewLevel": 1,
+					"viewId": "master"
+				},
+				"object": {
+					"viewName": "Detail",
+					"viewId": "detail",
+					"viewLevel": 1,
+					"controlAggregation": "midColumnPages"
+				},
+				"detailObjectNotFound": {
+					"viewName": "DetailObjectNotFound",
+					"viewId": "detailObjectNotFound",
+					"controlAggregation": "midColumnPages"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
 				}
 			}
 		}
