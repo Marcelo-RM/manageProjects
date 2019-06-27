@@ -77,15 +77,15 @@
 			},
 			"routes": [
 				{
-					"name": "RouteApp",
+					"name": "App",
 					"pattern": "RouteApp",
 					"target": [
-						"TargetApp"
+						"App"
 					]
 				}
 			],
 			"targets": {
-				"TargetApp": {
+				"App": {
 					"viewType": "XML",
 					"transition": "slide",
 					"clearControlAggregation": false,
