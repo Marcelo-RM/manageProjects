@@ -78,11 +78,15 @@ sap.ui.define([
 			var sQuery = oEvent.getParameter("query");
 
 			if (sQuery) {
-				this._oListFilterState.aSearch = [new Filter("Address/AddressType", FilterOperator.Contains, sQuery)];
-			} else {
-				this._oListFilterState.aSearch = [];
+				var aFilter = new Filter({
+						filters: [
+							new Filter ("id", FilterOperator.Contains, sQuery),
+							new Filter ("descricao", FilterOperator.Contains, sQuery)
+						],
+						and: false
+					});
 			}
-			this._applyFilterSearch();
+			this._oList.getBinding("items").filter(aFilter);
 
 		},
 
@@ -234,12 +238,13 @@ sap.ui.define([
 		 * @param {sap.m.ObjectListItem} oItem selected Item
 		 * @private
 		 */
-		_showDetail : function (oItem) {debugger;
+		_showDetail : function (oItem) {
 			var bReplace = !Device.system.phone;
 			// set the layout property of FCL control to show two columns
 			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
 			this.getRouter().navTo("object", {
-				objectId : oItem.getBindingContext().getProperty("id")
+				objectId : oItem.getBindingContext().getProperty("id"),
+				objectName : oItem.getBindingContext().getProperty("nome")
 			}, bReplace);
 		},
 
@@ -254,23 +259,6 @@ sap.ui.define([
 			if (this._oList.getBinding("items").isLengthFinal()) {
 				sTitle = this.getResourceBundle().getText("masterTitleCount", [iTotalItems]);
 				this.getModel("masterView").setProperty("/title", sTitle);
-			}
-		},
-
-		/**
-		 * Internal helper method to apply both filter and search state together on the list binding
-		 * @private
-		 */
-		_applyFilterSearch : function () {
-			var aFilters = this._oListFilterState.aSearch.concat(this._oListFilterState.aFilter),
-				oViewModel = this.getModel("masterView");
-			this._oList.getBinding("items").filter(aFilters, "Application");
-			// changes the noDataText of the list in case there are no filter results
-			if (aFilters.length !== 0) {
-				oViewModel.setProperty("/noDataText", this.getResourceBundle().getText("masterListNoDataWithFilterOrSearchText"));
-			} else if (this._oListFilterState.aSearch.length > 0) {
-				// only reset the no data text to default when no new search was triggered
-				oViewModel.setProperty("/noDataText", this.getResourceBundle().getText("masterListNoDataText"));
 			}
 		},
 

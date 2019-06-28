@@ -10,15 +10,18 @@
 		busyIndicatorDelay="{detailView>/delay}">
 		<semantic:titleHeading>
 			<Title
-				text="{Address/AddressType}"
+				id="titleDetail"
+				text=""
 				level="H2"/>
 		</semantic:titleHeading>
 		<semantic:headerContent>
-			<ObjectAttribute title="{i18n>priceTitle}"/>
-
 		</semantic:headerContent>
 		<semantic:content>
-
+			<List items="{
+				path: 'detailView>/atividades'
+			}">
+				<ObjectListItem  title="{detailView>descricao}" ></ObjectListItem>
+			</List>
 		</semantic:content>
 		<!--Semantic ShareMenu Buttons-->
 		<semantic:sendEmailAction>

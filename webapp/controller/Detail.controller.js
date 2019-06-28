@@ -29,8 +29,6 @@ sap.ui.define([
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
 			this.setModel(oViewModel, "detailView");
-
-			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
 		},
 
 		/* =========================================================== */
@@ -65,13 +63,15 @@ sap.ui.define([
 		 */
 		_onObjectMatched : function (oEvent) {
 			var sObjectId =  oEvent.getParameter("arguments").objectId;
+			var sObjectName = oEvent.getParameter("arguments").objectName;
+
+			this.getView().byId("titleDetail").setText(sObjectName);
+
+			var atividades = this.getModel().getData().atividades.filter((x) => x.idProj == sObjectId)
+
+			this.getView().getModel("detailView").setProperty("/atividades", atividades);
+
 			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
-			this.getModel().metadataLoaded().then( function() {
-				var sObjectPath = this.getModel().createKey("BusinessPartnerSet", {
-					BusinessPartnerID :  sObjectId
-				});
-				this._bindView("/" + sObjectPath);
-			}.bind(this));
 		},
 
 		/**
