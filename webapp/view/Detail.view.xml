@@ -20,7 +20,16 @@
 			<List items="{
 				path: 'detailView>/atividades'
 			}">
-				<ObjectListItem  title="{detailView>descricao}" ></ObjectListItem>
+				<ObjectListItem  title="{detailView>descricao}" 
+					>
+					<ObjectAttribute title="{i18n>responsavel}" 
+						text="{path: 'detailView>idDev', formatter: '.formatter.getDev'}"></ObjectAttribute>
+					<firstStatus>
+						<ObjectStatus title="{i18n>status}" 
+							text="{path: 'detailView>status', formatter: '.formatter.formatStatusText'}"
+							state="{path: 'detailView>status', formatter: '.formatter.formatStatusColor'}"></ObjectStatus>
+					</firstStatus>
+				</ObjectListItem>
 			</List>
 		</semantic:content>
 		<!--Semantic ShareMenu Buttons-->

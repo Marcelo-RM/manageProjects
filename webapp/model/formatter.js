@@ -15,6 +15,31 @@ sap.ui.define([], function () {
 			}
 
 			return parseFloat(sValue).toFixed(2);
+		},
+		
+		formatStatusText: function(sValue){
+			if (!sValue){
+				return "";
+			}
+			return this.getResourceBundle().getText("statusText_" + sValue);
+		},
+		
+		formatStatusColor: function(sValue){
+			if(!sValue){
+				return "None";
+			}
+			return this.getResourceBundle().getText("statusColor_" + sValue);
+		},
+		
+		getDev: function(sValue){
+			if(!sValue){
+				return "";
+			}
+			
+			var model = this.getModel().getData();
+			var dev = model.desenvolvedores.filter(function(x){return x.id == sValue});
+			
+			return dev[0].nome;
 		}
 	};
 });
