@@ -45,6 +45,19 @@ sap.ui.define([
 		/* =========================================================== */
 		/* event handlers                                              */
 		/* =========================================================== */
+		
+		_getAddFrag: function(){
+			if(!this.addFrag){
+				this.addFrag = sap.ui.xmlfragment("manageprojects.manageprojects.fragment.AddProject", this);
+				this.getView().addDependent(this.addFrag);
+			}
+			
+			return this.addFrag;
+		},
+		
+		openAdd: function(oEvent){
+			this._getAddFrag().openBy(oEvent.getSource());
+		},
 
 		/**
 		 * After list data is available, this handler method updates the

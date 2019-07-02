@@ -53,7 +53,7 @@
 						<ToolbarSpacer/>
 						<Button
 							id="addProject"
-							press=".onAddProject"
+							press=".openAdd"
 							icon="sap-icon://add"
 							type="Transparent"/>
 					</OverflowToolbar>
