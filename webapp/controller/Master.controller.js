@@ -87,20 +87,14 @@ sap.ui.define([
 				this.onRefresh();
 				return;
 			}
-
+ 
 			var sQuery = oEvent.getParameter("query");
 
 			if (sQuery) {
-				var aFilter = new Filter({
-						filters: [
-							new Filter ("id", FilterOperator.Contains, sQuery),
-							new Filter ("descricao", FilterOperator.Contains, sQuery)
-						],
-						and: false
-					});
+				var aFilter = new Filter("nome", FilterOperator.Contains, sQuery);
 			}
-			this._oList.getBinding("items").filter(aFilter);
 
+			this._oList.getBinding("items").filter(aFilter);
 		},
 
 		/**
