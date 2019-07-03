@@ -37,7 +37,7 @@ sap.ui.define([], function () {
 			}
 			
 			var model = this.getModel().getData();
-			var dev = model.desenvolvedores.filter(function(x){return x.id == sValue});
+			var dev = model.desenvolvedores.filter((x) => x.id == sValue);
 			
 			return dev[0].nome;
 		}

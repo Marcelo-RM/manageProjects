@@ -67,7 +67,7 @@ sap.ui.define([
 
 			this.getView().byId("titleDetail").setText(sObjectName);
 
-			var atividades = this.getModel().getData().atividades.filter((x) => x.idProj == sObjectId)
+			var atividades = this.getModel().getData().atividades.filter((x) => x.idProj == sObjectId);
 
 			this.getView().getModel("detailView").setProperty("/atividades", atividades);
 
