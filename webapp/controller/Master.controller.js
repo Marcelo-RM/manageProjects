@@ -37,7 +37,7 @@ sap.ui.define([
 			};
 
 			this.setModel(oViewModel, "masterView");
-
+			
 			this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 			this.getRouter().attachBypassed(this.onBypassed, this);
 		},
@@ -174,12 +174,23 @@ sap.ui.define([
 		 * @public
 		 */
 		selectProject : function (oEvent) {
-			var oList = oEvent.getSource(),
-				bSelected = oEvent.getParameter("selected");
+			//var oList = oEvent.getSource(),
+			//	bSelected = oEvent.getParameter("selected");
 
 			// skip navigation when deselecting an item in multi selection mode
 				// get the list item, either from the listItem parameter or from the event's source itself (will depend on the device-dependent mode).
 			this._showDetail(oEvent.getParameter("listItem") || oEvent.getSource());
+		},
+		
+		createNewProject: function(oEvent){
+			//Some Teste
+			var model = this.getView().getModel();
+			var localData = model.getData();
+			var index = localData.projetos.length;
+			var name = oEvent.getSource().getParent().getParent().getAggregation("formElements")[0].getAggregation("fields")[0].getValue();
+			
+			localData.projetos[index] = {nome: name, id: index + 1};
+			this.getView().getModel().setData(localData);
 		},
 
 		/**
@@ -237,6 +248,7 @@ sap.ui.define([
 			this.getModel("appView").setProperty("/busy", false);
 			//Set the layout property of the FCL control to 'OneColumn'
 			this.getModel("appView").setProperty("/layout", "OneColumn");
+			
 		},
 
 		/**

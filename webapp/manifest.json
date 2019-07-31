@@ -59,7 +59,10 @@
 			},
 			"": {
 				"type": "sap.ui.model.json.JSONModel",
-				"uri": "model/projects.json"
+				"uri": "model/projects.json",
+				"settings": {
+					"defaultBindingMode": "TwoWay"
+				}
 			}
 		},
 		"resources": {

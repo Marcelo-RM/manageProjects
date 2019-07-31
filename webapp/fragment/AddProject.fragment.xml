@@ -1,5 +1,6 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form">
-	<ResponsivePopover title="{i18n>addProj}" class="sapUiContentPadding" placement="Auto" initialFocus="email">
+	<ResponsivePopover title="{i18n>addProj}" class="sapUiContentPadding" placement="Auto" initialFocus="email"
+		beforeOpen=".bindFormProject">
 		<VBox>
 			<f:Form>
 				<f:layout>
@@ -12,13 +13,18 @@
 							<Input id="nameProj"/>
 						</f:fields>
 					</f:FormElement>
+					<f:FormElement>
+						<f:fields>
+							<Button icon="sap-icon://save" type="Transparent" press=".createNewProject"/>
+						</f:fields>
+					</f:FormElement>
 				</f:FormContainer>
 			</f:Form>
-			<Bar>
+			<!--<Bar>
 				<contentRight>
-					<Button icon="sap-icon://save" type="Transparent"/>
+					<Button icon="sap-icon://save" type="Transparent" press=".createNewProject"/>
 				</contentRight>
-			</Bar>
+			</Bar>-->
 		</VBox>
 	</ResponsivePopover>
 </core:FragmentDefinition>
