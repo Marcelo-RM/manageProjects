@@ -1,5 +1,5 @@
 <mvc:View controllerName="manageprojects.manageprojects.controller.Detail" xmlns="sap.m" xmlns:semantic="sap.f.semantic"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:mvc="sap.ui.core.mvc" xmlns:dnd="sap.ui.core.dnd">
 	<semantic:SemanticPage id="detailPage" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
 		<semantic:titleHeading>
 			<Title id="titleDetail" text="" level="H2"/>
@@ -22,12 +22,8 @@
 			</List>-->
 			<HBox alignContent="Stretch">
 				<!-- NÃO INICIADOS -->
-				<List items="{ 
-					path: 'detailView>/atividades',
-					filters : [
-            			{ path : 'status', operator : 'EQ', value1 : 'C'}
-        			]
-				}" headerText="Não iniciados" width="99%" noDataText="Vazio">
+				<List items="{ path: 'detailView>/atividades', filters : [ { path : 'status', operator : 'EQ', value1 : 'C'} ] }" headerText="Não iniciados"
+					width="99%" noDataText="Vazio">
 					<ObjectListItem title="{detailView>descricao}">
 						<ObjectAttribute text="{path: 'detailView>idDev', formatter: '.formatter.getDev'}"></ObjectAttribute>
 						<firstStatus>
@@ -36,16 +32,19 @@
 						</firstStatus>
 					</ObjectListItem>
 					<layoutData>
-			         <FlexItemData growFactor="1"/>
-			      </layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+					<dragDropConfig>
+						<dnd:DragDropInfo sourceAggregation="items" 
+							targetAggregation="items" 
+							dropPosition="Between" 
+							drop=".onReorderItems"/>
+					</dragDropConfig>
 				</List>
+				
 				<!-- EM ANDAMENTO -->
-				<List items="{ 
-					path: 'detailView>/atividades',
-					filters : [
-            			{ path : 'status', operator : 'EQ', value1 : 'B'}
-        			]
-				}" headerText="Em andamento" width="99%" noDataText="Vazio">
+				<List items="{ path: 'detailView>/atividades', filters : [ { path : 'status', operator : 'EQ', value1 : 'B'} ] }" headerText="Em andamento"
+					width="99%" noDataText="Vazio">
 					<ObjectListItem title="{detailView>descricao}">
 						<ObjectAttribute text="{path: 'detailView>idDev', formatter: '.formatter.getDev'}"></ObjectAttribute>
 						<firstStatus>
@@ -54,16 +53,18 @@
 						</firstStatus>
 					</ObjectListItem>
 					<layoutData>
-			         <FlexItemData growFactor="1"/>
-			      </layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+					<dragDropConfig>
+						<dnd:DragDropInfo sourceAggregation="items" 
+							targetAggregation="items" 
+							dropPosition="Between" 
+							drop=".onReorderItems"/>
+					</dragDropConfig>
 				</List>
 				<!-- ENCERRADOS -->
-				<List items="{ 
-					path: 'detailView>/atividades',
-					filters : [
-            			{ path : 'status', operator : 'EQ', value1 : 'A'}
-        			]
-				}" headerText="Encerrados" width="99%" noDataText="Vazio">
+				<List items="{ path: 'detailView>/atividades', filters : [ { path : 'status', operator : 'EQ', value1 : 'A'} ] }" headerText="Encerrados"
+					width="99%" noDataText="Vazio">
 					<ObjectListItem title="{detailView>descricao}">
 						<ObjectAttribute text="{path: 'detailView>idDev', formatter: '.formatter.getDev'}"></ObjectAttribute>
 						<firstStatus>
@@ -72,8 +73,15 @@
 						</firstStatus>
 					</ObjectListItem>
 					<layoutData>
-			         <FlexItemData growFactor="1"/>
-			      </layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+					<dragDropConfig>
+						<dnd:DragDropInfo 
+							sourceAggregation="items"
+							targetAggregation="items"
+							dropPosition="Between" 
+							drop=".onReorderItems"/>
+					</dragDropConfig>
 				</List>
 			</HBox>
 		</semantic:content>

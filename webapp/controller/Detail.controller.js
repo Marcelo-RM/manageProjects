@@ -154,6 +154,10 @@ sap.ui.define([
 			//this.getOwnerComponent().oListSelector.clearMasterListSelection();
 			this.getRouter().navTo("master");
 		},
+		
+		onReorderItems: function(oEvent){
+			//TODO: implementar re-ordenação de itens
+		},
 
 		/**
 		 * Toggle between full and non full screen mode.
