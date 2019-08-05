@@ -111,7 +111,7 @@ sap.ui.define([
 				this.getRouter().getTargets().display("detailObjectNotFound");
 				// if object could not be found, the selection in the master list
 				// does not make sense anymore.
-				this.getOwnerComponent().oListSelector.clearMasterListSelection();
+				//this.getOwnerComponent().oListSelector.clearMasterListSelection();
 				return;
 			}
 

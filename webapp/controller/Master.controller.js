@@ -191,6 +191,9 @@ sap.ui.define([
 			
 			localData.projetos[index] = {nome: name, id: index + 1};
 			this.getView().getModel().setData(localData);
+			
+			//Close popover
+			oEvent.getSource().getParent().getParent().getParent().getParent().getParent().close();
 		},
 
 		/**
