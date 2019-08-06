@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+<ObjectListItem title="{descricao}">
+	<ObjectAttribute text="{path: 'idDev', formatter: '.formatter.getDev'}"></ObjectAttribute>
+	<firstStatus>
+		<ObjectStatus text="{path: 'status', formatter: '.formatter.formatStatusText'}"
+			state="{path: 'status', formatter: '.formatter.formatStatusColor'}"></ObjectStatus>
+	</firstStatus>
+</ObjectListItem>
+</core:FragmentDefinition>

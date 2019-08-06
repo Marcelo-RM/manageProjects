@@ -62,16 +62,50 @@ sap.ui.define([
 		 * @private
 		 */
 		_onObjectMatched : function (oEvent) {
-			var sObjectId =  oEvent.getParameter("arguments").objectId;
+			this.sObjectId =  oEvent.getParameter("arguments").objectId;
 			var sObjectName = oEvent.getParameter("arguments").objectName;
 
+			this.bindLists();
+
 			this.getView().byId("titleDetail").setText(sObjectName);
-
-			var atividades = this.getModel().getData().atividades.filter((x) => x.idProj == sObjectId);
-
-			this.getView().getModel("detailView").setProperty("/atividades", atividades);
-
 			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
+		},
+		
+		bindLists: function(){
+			var masterFilter = new sap.ui.model.Filter("idProj", "EQ", this.sObjectId);
+			var fragment = new sap.ui.xmlfragment("manageprojects.manageprojects.fragment.ListItem", this);
+			
+			var listNaoIniciados = this.getView().byId("naoIniciados"),
+				listEmAndamento = this.getView().byId("emAndamento"),
+				listEncerrados = this.getView().byId("encerrados");
+				
+			var filterNaoIniciado = new sap.ui.model.Filter({
+				filters: [
+					masterFilter,
+					new sap.ui.model.Filter("status", "EQ", "C")
+				],
+				and: true
+			});
+			
+			var filterEmAndamento = new sap.ui.model.Filter({
+				filters: [
+					masterFilter,
+					new sap.ui.model.Filter("status", "EQ", "B")
+				],
+				and: true
+			});
+			
+			var filterEncerrado = new sap.ui.model.Filter({
+				filters: [
+					masterFilter,
+					new sap.ui.model.Filter("status", "EQ", "A")
+				],
+				and: true
+			});
+			
+			listNaoIniciados.bindItems("/atividades", fragment, null, filterNaoIniciado);
+			listEmAndamento.bindItems("/atividades", fragment, null, filterEmAndamento);
+			listEncerrados.bindItems("/atividades", fragment, null, filterEncerrado);
 		},
 
 		/**
@@ -155,8 +189,28 @@ sap.ui.define([
 			this.getRouter().navTo("master");
 		},
 		
-		onReorderItems: function(oEvent){
-			//TODO: implementar re-ordenação de itens
+		onDropList: function(oEvent){
+			var itemPath = oEvent.getParameter("draggedControl").getBindingContextPath();
+			var droppedControl = oEvent.getParameter("droppedControl");
+			
+			try {
+				var statusList = this.onGetStatus(droppedControl.getProperty("headerText"));
+			}catch(e){
+				statusList = this.onGetStatus(droppedControl.getParent().getProperty("headerText"));
+			}
+			
+			this.getView().getModel().getProperty(itemPath).status = statusList;
+			
+			//Alterar status do item e atuializar a view
+			this.bindLists();
+		},
+		
+		onGetStatus: function(sValue){
+			if(sValue === "Encerrados"){return "A";}
+			if(sValue === "Em andamento"){return "B";}
+			if(sValue === "Não iniciados"){return "C";}
+			
+			return "";
 		},
 
 		/**

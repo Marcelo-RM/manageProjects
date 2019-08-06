@@ -22,65 +22,76 @@
 			</List>-->
 			<HBox alignContent="Stretch">
 				<!-- NÃO INICIADOS -->
-				<List items="{ path: 'detailView>/atividades', filters : [ { path : 'status', operator : 'EQ', value1 : 'C'} ] }" headerText="Não iniciados"
+				<List id="naoIniciados" headerText="Não iniciados"
 					width="99%" noDataText="Vazio">
-					<ObjectListItem title="{detailView>descricao}">
-						<ObjectAttribute text="{path: 'detailView>idDev', formatter: '.formatter.getDev'}"></ObjectAttribute>
-						<firstStatus>
-							<ObjectStatus text="{path: 'detailView>status', formatter: '.formatter.formatStatusText'}"
-								state="{path: 'detailView>status', formatter: '.formatter.formatStatusColor'}"></ObjectStatus>
-						</firstStatus>
-					</ObjectListItem>
 					<layoutData>
 						<FlexItemData growFactor="1"/>
 					</layoutData>
 					<dragDropConfig>
-						<dnd:DragDropInfo sourceAggregation="items" 
-							targetAggregation="items" 
-							dropPosition="Between" 
-							drop=".onReorderItems"/>
+						<dnd:DragInfo
+							groupName="moveToList"
+							sourceAggregation="items"
+							dragStart="onDragStart" />
+						<dnd:DropInfo
+							groupName="moveToList"
+							targetAggregation="items"
+							dropPosition="Between"
+							drop="onDropList" />
+						<dnd:DragDropInfo
+							sourceAggregation="items"
+							targetAggregation="items"
+							dropPosition="Between"
+							dragStart="onDragStart"
+							drop="onDropList" />
 					</dragDropConfig>
 				</List>
 				
 				<!-- EM ANDAMENTO -->
-				<List items="{ path: 'detailView>/atividades', filters : [ { path : 'status', operator : 'EQ', value1 : 'B'} ] }" headerText="Em andamento"
+				<List id="emAndamento" headerText="Em andamento"
 					width="99%" noDataText="Vazio">
-					<ObjectListItem title="{detailView>descricao}">
-						<ObjectAttribute text="{path: 'detailView>idDev', formatter: '.formatter.getDev'}"></ObjectAttribute>
-						<firstStatus>
-							<ObjectStatus text="{path: 'detailView>status', formatter: '.formatter.formatStatusText'}"
-								state="{path: 'detailView>status', formatter: '.formatter.formatStatusColor'}"></ObjectStatus>
-						</firstStatus>
-					</ObjectListItem>
 					<layoutData>
 						<FlexItemData growFactor="1"/>
 					</layoutData>
 					<dragDropConfig>
-						<dnd:DragDropInfo sourceAggregation="items" 
-							targetAggregation="items" 
-							dropPosition="Between" 
-							drop=".onReorderItems"/>
+						<dnd:DragInfo
+							groupName="moveToList"
+							sourceAggregation="items"
+							dragStart="onDragStart" />
+						<dnd:DropInfo
+							groupName="moveToList"
+							targetAggregation="items"
+							dropPosition="Between"
+							drop="onDropList" />
+						<dnd:DragDropInfo
+							sourceAggregation="items"
+							targetAggregation="items"
+							dropPosition="Between"
+							dragStart="onDragStart"
+							drop="onDropList" />
 					</dragDropConfig>
 				</List>
 				<!-- ENCERRADOS -->
-				<List items="{ path: 'detailView>/atividades', filters : [ { path : 'status', operator : 'EQ', value1 : 'A'} ] }" headerText="Encerrados"
+				<List id="encerrados" headerText="Encerrados"
 					width="99%" noDataText="Vazio">
-					<ObjectListItem title="{detailView>descricao}">
-						<ObjectAttribute text="{path: 'detailView>idDev', formatter: '.formatter.getDev'}"></ObjectAttribute>
-						<firstStatus>
-							<ObjectStatus text="{path: 'detailView>status', formatter: '.formatter.formatStatusText'}"
-								state="{path: 'detailView>status', formatter: '.formatter.formatStatusColor'}"></ObjectStatus>
-						</firstStatus>
-					</ObjectListItem>
 					<layoutData>
 						<FlexItemData growFactor="1"/>
 					</layoutData>
 					<dragDropConfig>
-						<dnd:DragDropInfo 
+						<dnd:DragInfo
+							groupName="moveToList"
+							sourceAggregation="items"
+							dragStart="onDragStart" />
+						<dnd:DropInfo
+							groupName="moveToList"
+							targetAggregation="items"
+							dropPosition="Between"
+							drop="onDropList" />
+						<dnd:DragDropInfo
 							sourceAggregation="items"
 							targetAggregation="items"
-							dropPosition="Between" 
-							drop=".onReorderItems"/>
+							dropPosition="Between"
+							dragStart="onDragStart"
+							drop="onDropList" />
 					</dragDropConfig>
 				</List>
 			</HBox>
