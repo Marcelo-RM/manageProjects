@@ -194,14 +194,46 @@ sap.ui.define([
 			localData.projetos[index] = {nome: name, id: index + 1};
 			this.getView().getModel().setData(localData);
 			
-			this.saveActivities(index, fElements);
+			this.createObjectToSave(index + 1, fElements);
 			this.removeFieldsPopOver(fElements);
 			//Close popover
 			popOver.close();
 		},
 		
-		saveActivities: function(idProj, elements){
+		createObjectToSave: function(idProj, elements){
+			var toSave = [];
 			
+			//variavel i = 1 para ignorar o nome do projeto
+			for(var i = 1; i < elements.length; i++){
+				var ativ = elements[i].getFields()[0].getItems()[1].getValue();
+				var resp = elements[i].getFields()[1].getItems()[1].getSelectedKey();
+				var status = elements[i].getFields()[2].getItems()[1].getItems()[0].getSelectedKey();
+				
+				toSave.push({
+					atividade: ativ,
+					responsavel: resp,
+					status: status
+				});
+			}
+			
+			this.saveAtividades(toSave, idProj);
+		},
+		
+		saveAtividades: function(toSave, idProj){
+			var model = this.getView().getModel(),
+				localData = model.getData(),
+				index = localData.atividades.length;
+			
+			for(var i = 0; i < toSave.length; i++){
+				localData.atividades[index + i] = {
+					descricao: toSave[i].atividade,
+					idDev: Number(toSave[i].responsavel),
+					status: toSave[i].status,
+					idProj: Number(idProj)
+				};
+			}
+			
+			this.getView().getModel().setData(localData);
 		},
 		
 		removeFieldsPopOver: function(elements){
