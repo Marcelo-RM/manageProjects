@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<f:FormElement>
+		<f:fields>
+			<HBox>
+				<HBox direction="Column">
+					<Label text="Atividade"></Label>
+					<Input></Input>
+				</HBox>
+				<HBox direction="Column">
+					<Label text="Responsável"></Label>
+					<ComboBox items="{path: '/desenvolvedores'}">
+						<core:Item key="{id}" text="{nome}"/>
+					</ComboBox>
+				</HBox>
+				<HBox direction="Column">
+					<Label text="Status"></Label>
+					<ComboBox>
+						<core:ListItem key="A" text="Finalizado"></core:ListItem>
+						<core:ListItem key="B" text="Em Andamento"></core:ListItem>
+						<core:ListItem key="C" text="Não Iniciado"></core:ListItem>
+					</ComboBox>
+				</HBox>
+			</HBox>
+		</f:fields>
+	</f:FormElement>
+</core:FragmentDefinition>

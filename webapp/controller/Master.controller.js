@@ -195,6 +195,19 @@ sap.ui.define([
 			//Close popover
 			oEvent.getSource().getParent().getParent().getParent().getParent().getParent().close();
 		},
+		
+		/**
+		 * Adicionar campos para inserção de nova atividade na tela
+		 */
+		 
+		 addNewActivitie: function(oEvent){
+			var form = oEvent.getSource().getParent().getParent().getAggregation("items")[0]; 
+			
+			var newElement = new sap.ui.xmlfragment("manageprojects.manageprojects.fragment.NewActivity", this);
+			
+			form.getAggregation("formContainers")[0].addFormElement(newElement);
+			
+		 },
 
 		/**
 		 * Event handler for the bypassed event, which is fired when no routing pattern matched.
