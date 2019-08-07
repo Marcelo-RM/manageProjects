@@ -14,28 +14,18 @@
 						</f:fields>
 					</f:FormElement>
 					
-					<!-- Inserção de atividades -->
-					<f:FormElement>
-						<f:fields>
-						</f:fields>
-					</f:FormElement>
-					<!-- Fim Inserção atividades -->
-					<f:FormElement>
-						<f:fields>
-						</f:fields>
-					</f:FormElement>
 				</f:FormContainer>
 			</f:Form>
-			<Bar>
-				<contentRight>
-					<Button icon="sap-icon://add" type="Transparent" 
-						press=".addNewActivitie" tooltip="Adicionar"
-						text="Adicionar Atividade"/>
-					<Button icon="sap-icon://save" type="Transparent" 
-						press=".createNewProject" tooltip="Salvar"
-						text="Salvar"/>
-				</contentRight>
-			</Bar>
 		</VBox>
+		<beginButton>
+			<Button icon="sap-icon://add" type="Transparent" 
+				press=".addNewActivitie" tooltip="Adicionar"
+				text="Adicionar Atividade"/>
+		</beginButton>
+		<endButton>
+			<Button icon="sap-icon://save" type="Transparent" 
+				press=".createNewProject" tooltip="Salvar"
+				text="Salvar"/>
+		</endButton>
 	</ResponsivePopover>
 </core:FragmentDefinition>

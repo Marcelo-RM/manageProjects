@@ -46,7 +46,7 @@ sap.ui.define([
 		/* event handlers                                              */
 		/* =========================================================== */
 		
-		_getAddFrag: function(){
+		_getAddFrag: function(){ //Using singleton 
 			if(!this.addFrag){
 				this.addFrag = sap.ui.xmlfragment("manageprojects.manageprojects.fragment.AddProject", this);
 				this.getView().addDependent(this.addFrag);
@@ -201,12 +201,21 @@ sap.ui.define([
 		 */
 		 
 		 addNewActivitie: function(oEvent){
-			var form = oEvent.getSource().getParent().getParent().getAggregation("items")[0]; 
+		 	var popOver = oEvent.getSource().getParent().getParent();
+			var form = popOver.getAggregation("content")[0].getAggregation("items")[0]; 
 			
 			var newElement = new sap.ui.xmlfragment("manageprojects.manageprojects.fragment.NewActivity", this);
 			
 			form.getAggregation("formContainers")[0].addFormElement(newElement);
-			
+		 },
+		 
+		 onDeleteActivity: function(oEvent){
+		 	var formElement = oEvent.getSource().getParent().getParent().getParent();
+		 	//formElement.removeAllFields();
+		 	
+		 	//Gambiarra para evitar o fechamento do popover
+		 	formElement.getParent().getAggregation("formElements")[0].getAggregation("fields")[0].focus();
+		 	formElement.destroy();
 		 },
 
 		/**
