@@ -184,16 +184,36 @@ sap.ui.define([
 		
 		createNewProject: function(oEvent){
 			//Some Teste
-			var model = this.getView().getModel();
-			var localData = model.getData();
-			var index = localData.projetos.length;
-			var name = oEvent.getSource().getParent().getParent().getAggregation("formElements")[0].getAggregation("fields")[0].getValue();
+			var model = this.getView().getModel(),
+				localData = model.getData(),
+				index = localData.projetos.length,
+				popOver = oEvent.getSource().getParent().getParent(),
+				fElements = popOver.getAggregation("content")[0].getAggregation("items")[0].getAggregation("formContainers")[0].getAggregation("formElements"),
+				name = fElements[0].getAggregation("fields")[0].getValue();
 			
 			localData.projetos[index] = {nome: name, id: index + 1};
 			this.getView().getModel().setData(localData);
 			
+			this.saveActivities(index, fElements);
+			this.removeFieldsPopOver(fElements);
 			//Close popover
-			oEvent.getSource().getParent().getParent().getParent().getParent().getParent().close();
+			popOver.close();
+		},
+		
+		saveActivities: function(idProj, elements){
+			
+		},
+		
+		removeFieldsPopOver: function(elements){
+			for(var i = 0; i < elements.length; i++){
+				
+				if(i === 0){ 
+					elements[i].getAggregation("fields")[0].setValue(""); 
+					continue;
+				}
+				
+				elements[i].destroy();
+			}
 		},
 		
 		/**
