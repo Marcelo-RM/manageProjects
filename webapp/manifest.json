@@ -93,10 +93,7 @@
 				{
 					"pattern": "projetos/{objectId}/{objectName}",
 					"name": "object",
-					"target": [
-						"master",
-						"object"
-					]
+					"target": "object"
 				}
 			],
 			"targets": {
